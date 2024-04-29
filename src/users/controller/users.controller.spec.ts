@@ -54,6 +54,7 @@ describe('UsersController', () => {
         ...responseMock,
         accessLevel: createUserDto.accessLevel,
         id: 1,
+        deleted: null,
       });
 
       expect(await usersController.create(createUserDto)).toEqual(responseMock);
@@ -72,6 +73,7 @@ describe('UsersController', () => {
         ...responseMock,
         accessLevel: user.accessLevel,
         id: 1,
+        deleted: null,
       });
 
       expect(await usersController.findOne('1')).toEqual(responseMock);

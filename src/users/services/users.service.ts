@@ -51,6 +51,7 @@ export class UsersService {
       ...user,
       ...(updateUserDto.acessLevel && { acessLevel: updateUserDto.acessLevel }),
       ...(updateUserDto.email && { email: updateUserDto.email }),
+      deleted: updateUserDto.deleted,
     };
     await this.usersRepository.save(newUser);
   }
@@ -58,11 +59,15 @@ export class UsersService {
   async remove(id: number) {
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) throw new NotFoundException();
-    return this.usersRepository.delete(id);
+    const updateUser = {
+      ...user,
+      deleted: new Date(),
+    };
+    await this.usersRepository.save(updateUser);
   }
 
   private mapToResponseDto(user: User) {
-    const { id, email, accessLevel, lastName, firstName } = user;
-    return { id, email, accessLevel, lastName, firstName };
+    const { id, email, accessLevel, lastName, firstName, deleted } = user;
+    return { id, email, accessLevel, lastName, firstName, deleted };
   }
 }

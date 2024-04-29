@@ -6,6 +6,7 @@ import { seedData } from './database/seed/seed-data';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const dataSource = app.get(DataSource);
+  app.enableCors();
   await seedData(dataSource);
 
   await app.listen(3000);

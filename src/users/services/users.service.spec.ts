@@ -50,6 +50,7 @@ describe('UsersService', () => {
         firstName: 'Teste',
         lastName: '1',
         accessLevel: 'Common',
+        deleted: null,
       };
       const hashedPassword = 'hashedPassword';
       createUserDto.password = hashedPassword;
@@ -78,7 +79,7 @@ describe('UsersService', () => {
 
       jest
         .spyOn(userRepository, 'findOneBy')
-        .mockResolvedValue({ ...createUserDto, id: 1 });
+        .mockResolvedValue({ ...createUserDto, id: 1, deleted: null });
 
       await expect(usersService.create(createUserDto)).rejects.toThrow(
         BadRequestException,

@@ -20,6 +20,9 @@ export class User {
   @Column({ default: 'Common' })
   accessLevel: 'Common' | 'Admin';
 
+  @Column({ default: null })
+  deleted: Date | null;
+
   constructor(user: Partial<User>) {
     Object.assign(this, user);
   }

@@ -66,7 +66,7 @@ describe('AuthService', () => {
       };
       jest
         .spyOn(usersService, 'findOneByEmail')
-        .mockResolvedValue({ ...user, id: 1 });
+        .mockResolvedValue({ ...user, id: 1, deleted: null });
       jest.spyOn(hashService, 'comparePassword').mockResolvedValue(false);
 
       await expect(
@@ -85,10 +85,14 @@ describe('AuthService', () => {
         lastName: '1',
         accessLevel: 'Common',
       };
-      const token = { token: 'mockToken' };
+      const token = {
+        token: 'mockToken',
+        accessLevel: 'Common',
+        fistName: 'Teste',
+      };
       jest
         .spyOn(usersService, 'findOneByEmail')
-        .mockResolvedValue({ ...user, id: 1 });
+        .mockResolvedValue({ ...user, id: 1, deleted: null });
       jest.spyOn(hashService, 'comparePassword').mockResolvedValue(true);
       jest.spyOn(tokenService, 'generateToken').mockReturnValue(token);
 

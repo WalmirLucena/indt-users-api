@@ -13,7 +13,6 @@
   - Eslint
   - TypeORM
 
-
 # 🚀 Como Usar
 
 ### 💾 Clone o Repositório
@@ -50,8 +49,21 @@ Para rodar um teste especifico:
   yarn test nomeDoArquivo
 ```
 
+# Como logar na API?
+
+- Após subir o projeto, é possivel logar com os seguintes usuários que foram adicionados ao banco no seed.
+
+```json
+{
+  "user": { "email": "admin@gmail.com", "password": "Admin123" },
+  "admin": { "email": "user@gmail.com", "password": "User123" }
+}
+```
+
 # Rotas da API Auth
+
 ### Login
+
 **POST** `/users`
 
 Request Payload
@@ -68,6 +80,8 @@ Response Payload - HTTP STATUS 201
 ```json
 {
 	"token": <number>,
+  "firstName": <string>,
+  "accessLevel" <'Common' | 'Admin'>
 }
 ```
 
@@ -75,14 +89,16 @@ Error Response - HTTP STATUS 400
 
 ```json
 {
-	"message": "Email or password incorrect",
-	"error": "Bad Request",
-	"statusCode": 400
+  "message": "Email or password incorrect",
+  "error": "Bad Request",
+  "statusCode": 400
 }
 ```
 
 # Rotas da API User
+
 ### CreateUsers
+
 **POST** `/users`
 
 Request Payload
@@ -115,9 +131,9 @@ Error Response - HTTP STATUS 400
 
 ```json
 {
-	"message": "User already exists",
-	"error": "Bad Request",
-	"statusCode": 400
+  "message": "User already exists",
+  "error": "Bad Request",
+  "statusCode": 400
 }
 ```
 
@@ -130,9 +146,10 @@ Error Response - HTTP STATUS 401
 ```
 
 ### GetUsers
+
 **GET** `/users/:id`
 
-**Caso envie o id no param, retorna um único item
+\*\*Caso envie o id no param, retorna um único item
 
 Request Payload
 
@@ -170,6 +187,7 @@ Error Response - HTTP STATUS 401
 ```
 
 ### UpdateUsers
+
 **PATCH** `/users/:id`
 
 Request Payload
@@ -178,6 +196,7 @@ Request Payload
 {
   "email": <string>,
 	"accessLevel": <'Common' | 'Admin'>,
+  "deleted": <Date | null>
 }
 ```
 
@@ -196,6 +215,7 @@ Error Response - HTTP STATUS 401
 ```
 
 ### DeleteUsers
+
 **DELETE** `/users/:id`
 
 Request Payload

@@ -25,13 +25,17 @@ export class AuthService {
     if (!passwordAuthenticated) {
       throw new BadRequestException('Email or password incorrect');
     }
-    const token = this.tokenService.generateToken(
+    const tokenData = this.tokenService.generateToken(
       process.env.SECRET,
       process.env.EXPIRESIN,
       {
         id: userExists.id,
       },
     );
-    return token;
+    return {
+      token: tokenData.token,
+      accessLevel: userExists.accessLevel,
+      firstName: userExists.firstName,
+    };
   }
 }
