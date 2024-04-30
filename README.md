@@ -18,7 +18,7 @@
 ### 💾 Clone o Repositório
 
 ```
-- git clone git@github.com:WalmirLucena/bemol-onboarding-api.git
+- git clone git@github.com:WalmirLucena/indt-users-api.git
 ```
 
 ## Executando o projeto
